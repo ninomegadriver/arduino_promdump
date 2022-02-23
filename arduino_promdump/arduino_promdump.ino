@@ -79,14 +79,14 @@ void basicSetup(){
 
 // Enables or disables the CHIP
 void ENABLE(bool select){
-  if(select == true){
+  if(select == true){  // Enable CHIP
     for(int i=0;i<CE_pins;i++){
-      if(SELECT[i] == 1) digitalWrite(CE[i], HIGH); // Enable CHIP
+      if(SELECT[i] == 1) digitalWrite(CE[i], HIGH);
       else digitalWrite(CE[i], LOW);
     }
-  }else{
-    for(int i=0;i<CE_pins;i++){
-      if(SELECT[i] == 1) digitalWrite(CE[i], LOW); // Disable CHIP, i.e: invert CE states
+  }else{ // Disable CHIP, i.e: invert CE states
+    for(int i=0;i<CE_pins;i++){ 
+      if(SELECT[i] == 1) digitalWrite(CE[i], LOW); 
       else digitalWrite(CE[i], HIGH);
     }
   }
@@ -98,14 +98,14 @@ uint8_t getByte(bool fuse = false){
   String  fuses;
   uint8_t result = 0x00;
   uint8_t status;
-  ENABLE(false); // Enable CHIP for reading
+  ENABLE(true); // Enable CHIP for reading
   for(int i=0; i<O_pins;i++){
     status = digitalRead(O[i]);
     result |= status << i;
     fuses.concat(status);  // Save each output state
     fuses.concat(":");
   }
-  ENABLE(true); // Disable it for next read
+  ENABLE(false); // Disable it for next read
   fuses.remove(fuses.length()-1,1);
   if(fuse == true) Serial.print(fuses); // Print each Ouput status
   return result;
@@ -219,11 +219,11 @@ void MainMenu()
     Serial.println("# Fuse/bits like dump");
     Serial.println("# ");
     Serial.println("# Format: ");
-    Serial.println("# [Address Pins Bits]:[Output Pins Bits]");
-    Serial.println("# [0:1:2:3:4:5:6:8..]:[0:1:2:3:4:5:6...]");
+    Serial.println("# [Adress Int][Address Pins Bits]:[Output Pins Bits]");
+    Serial.println("# [0.........][0:1:2:3:4:5:6:8..]:[0:1:2:3:4:5:6...]");
     for(uint16_t address=0;address<PROMsize;address++){
         String ret = setAddress(address);
-        sprintf(message, "[%s]:[", ret.c_str());
+        sprintf(message, "[%03d][%s]:[", address, ret.c_str());
         Serial.print(message);
         uint8_t received_byte = getByte(true);
         crc.update(received_byte);
