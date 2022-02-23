@@ -1,6 +1,4 @@
 # Arduino Mega PROM dumper
-****************************************
-
 An Arduino MEGA sketch forr dumping old PROMs chips.
 
 
