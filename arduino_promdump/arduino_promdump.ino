@@ -195,7 +195,7 @@ void MainMenu()
   Serial.println("");
   Serial.println("Available devices:");
   Serial.println("");
-  Serial.println("82s141, 82s123, 82s129, mb7123, mb7054, 6349, 6348");
+  Serial.println("82s123, 82s129, 82s141, 6348, 6349, mb7054, mb7123");
   Serial.println("****************************************************************************************");
   Serial.write(0x00); // Sync char for external C++ client
 

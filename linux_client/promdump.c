@@ -117,7 +117,7 @@ void usage(char *fname){
   printf("%s -p 82s129 -f mydump.bin -t bin\n", fname);
   printf("%s -p 82s141 -f mydump.txt -t fuse\n\n", fname);
   printf("Supported PROMs:\n");
-  printf("82s141, 82s123, 82s129, mb7123, mb7054\n\n");
+  printf("82s123, 82s129, 82s141, 6348, 6349, mb7054, mb7123\n\n");
   exit(0);
 }
 
