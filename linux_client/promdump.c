@@ -168,6 +168,8 @@ int main(int argc, char **argv) {
               else if(strcmp(prom,"82s129") == 0) promsize = 32;
               else if(strcmp(prom,"82s141") == 0) promsize = 512;
               else if(strcmp(prom,"mb7123") == 0) promsize = 512;
+              else if(strcmp(prom,"6348") == 0)   promsize = 512;
+              else if(strcmp(prom,"6249") == 0)   promsize = 512;
               else if(strcmp(prom,"mb7054") == 0) promsize = 1023;
               if(promsize == 0) trigger_error("[5]: Unknown prom...");
               printf("Selected PROM \"%s\", size %d bytes...\n", prom, promsize);
