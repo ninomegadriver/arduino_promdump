@@ -4,6 +4,7 @@
  * 82S123: 256 BIT TTL BIPOLAR PROM
  * 
  * [Arduino Pin] [  Device Pin  ] [Arduino Pin]
+ * 
  *        A0  <==[O1         VCC]==> Vcc
  *        A1  <==[O2     8   ~CE]==> 12
  *        A2  <==[O3     2    A4]==> 11

@@ -1,7 +1,7 @@
 #include "common.h"
 
 /*
- * 53/6349-1, -2: 4096-BIT BIPOLAR PROM (512x8)
+ * 53/6349-1, -2: 512x8 BIPOLAR PROM
  * 53/6348-1
  * 
  * [Arduino Pin] [  Device Pin  ] [Arduino Pin]
