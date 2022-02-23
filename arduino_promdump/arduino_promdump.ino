@@ -190,7 +190,7 @@ void MainMenu()
   Serial.println("Dump formats:");
   Serial.println("");
   Serial.println("text   => Dump in readable text format");
-  Serial.println("fuse   => Fuse alike text readable dump");
+  Serial.println("fuse   => Fuse/bits like text readable dump");
   Serial.println("bin    => Dump in raw binary format (for client applications)");
   Serial.println("");
   Serial.println("Available devices:");
@@ -217,11 +217,11 @@ void MainMenu()
   uint32_t checksum;
   if(cmd.equals("fuse")){
     Serial.println(" ");
-    Serial.println("# Fuse alike dump");
+    Serial.println("# Fuse/bits like dump");
     Serial.println("# ");
     Serial.println("# Format: ");
-    Serial.println("# [Address Pins Status]:[Output Pins Status]");
-    Serial.println("# [0:1:2:3:4:5:6:8....]:[0:1:2:3:4:5:6.....]");
+    Serial.println("# [Address Pins Bits]:[Output Pins Bits]");
+    Serial.println("# [0:1:2:3:4:5:6:8..]:[0:1:2:3:4:5:6...]");
     for(uint16_t address=0;address<PROMsize;address++){
         String ret = setAddress(address);
         sprintf(message, "[%s]:[", ret.c_str());
@@ -234,7 +234,7 @@ void MainMenu()
     checksum = crc.finalize();
     sprintf(message, "# CRC32: 0x%lX", checksum);
     Serial.println(message);
-    Serial.println("#!"); // END sync tag for client applications
+    Serial.println("#!"); // Sync char ("!") for client application
   }else if(cmd.equals("text")){
     Serial.println(" ");
     int col=0;
