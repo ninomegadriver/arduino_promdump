@@ -63,6 +63,7 @@ uint16_t bits[] = {
 #include "82S129.hpp"
 #include "MB7054.hpp"
 #include "MB7123.hpp"
+#include "6349.hpp"
 
 // Basic pin configuration for all devices
 void basicSetup(){
@@ -169,6 +170,10 @@ bool config_device(String device){
     config_MB7123();
     basicSetup();
     return true;
+  }else if(device.equals("6349") || device.equals("6348") ) {
+    config_6349();
+    basicSetup();
+    return true;
   }
   return false;
 }
@@ -190,7 +195,7 @@ void MainMenu()
   Serial.println("");
   Serial.println("Available devices:");
   Serial.println("");
-  Serial.println("82s141, 82s123, 82s129, mb7123, mb7054");
+  Serial.println("82s141, 82s123, 82s129, mb7123, mb7054, 6349, 6348");
   Serial.println("****************************************************************************************");
   Serial.write(0x00); // Sync char for external C++ client
 
