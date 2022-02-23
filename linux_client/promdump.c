@@ -165,12 +165,12 @@ int main(int argc, char **argv) {
               // If you added more PROMs to arduino_promdump.ino
               // configure all the sizes here
               if     (strcmp(prom,"82s123") == 0) promsize = 32;
-              else if(strcmp(prom,"82s129") == 0) promsize = 32;
+              else if(strcmp(prom,"82s129") == 0) promsize = 256;
               else if(strcmp(prom,"82s141") == 0) promsize = 512;
               else if(strcmp(prom,"mb7123") == 0) promsize = 512;
               else if(strcmp(prom,"6348")   == 0) promsize = 512;
-              else if(strcmp(prom,"6249")   == 0) promsize = 512;
-              else if(strcmp(prom,"mb7054") == 0) promsize = 1023;
+              else if(strcmp(prom,"6349")   == 0) promsize = 512;
+              else if(strcmp(prom,"mb7054") == 0) promsize = 1024;
               if(promsize == 0) trigger_error("[5]: Unknown prom...");
               printf("Selected PROM \"%s\", size %d bytes...\n", prom, promsize);
               if(strcmp(dumpfile,"") == 0) trigger_error("[6]: You must specify a file to save dump to...");

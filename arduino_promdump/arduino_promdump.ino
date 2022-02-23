@@ -99,7 +99,6 @@ uint8_t getByte(bool fuse = false){
   uint8_t result = 0x00;
   uint8_t status;
   ENABLE(false); // Enable CHIP for reading
-  delay(10);
   for(int i=0; i<O_pins;i++){
     status = digitalRead(O[i]);
     result |= status << i;

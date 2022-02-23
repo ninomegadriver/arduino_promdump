@@ -20,7 +20,7 @@
  * 
  */
 
-uint8_t S141_A[]  =     {A7, A6,  A5, A4, A3, A2, A1, A0, 11}; // Address Pins
+uint8_t S141_A[]  =     {A7, A6,  A5, A4, A3, A2, A1, A0, 12}; // Address Pins
 uint8_t S141_O[]  =     {A8, A9, A10,  2,  3,  4,  5, 6};      // Output Pins
 uint8_t S141_CE[] =     {10,  9,   8, 7};                      // Chip Select/Enable Pins
 uint8_t S141_SELECT[] = {0,   0,   1, 1};                      // Status for enabling the chip

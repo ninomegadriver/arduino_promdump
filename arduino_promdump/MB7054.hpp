@@ -19,7 +19,7 @@
 
 uint8_t MB7054_A[]  =     {A4, A5,  A6, A7, A3, A2, A1, A0, 12, 11, 10}; // Address Pins
 uint8_t MB7054_O[]  =     { 9,  8,   7,  6};                             // Output Pins
-uint8_t MB7054_CE[] =     {A7,  5,   8, 7};                              // Chip Select/Enable Pins
+uint8_t MB7054_CE[] =     {A7,  5};                                      // Chip Select/Enable Pins
 uint8_t MB7054_SELECT[] = {0,   0};                                      // Status for enabling the chip
 
 void config_MB7054(){
@@ -30,5 +30,5 @@ void config_MB7054(){
     O=MB7054_O;
     CE=MB7054_CE;
     SELECT = MB7054_SELECT;
-    PROMsize = 1023;
+    PROMsize = 1024;
 }
