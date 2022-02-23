@@ -1,5 +1,5 @@
 # Arduino Mega PROM dumper
-An Arduino MEGA sketch forr dumping old PROMs chips.
+An Arduino MEGA sketch for dumping old PROMs chips.
 
 
 Currently supported chips:
@@ -9,4 +9,4 @@ Currently supported chips:
 Check the *.hpp files for pin configuration for each device.
 
 
-Use the Arduino IDE serial console for dumping or use the included linux console tool to save the dumps.
+Use the Arduino IDE serial console for text based dumping or the included linux console tool to save binary dumps.
