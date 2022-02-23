@@ -1,7 +1,7 @@
 #include "common.h"
 
 /*
- * 82S123: 256 BIT TTL BIPOLAR PROM
+ * 82S123: 256 BIT TTL BIPOLAR PROM 
  * 
  * [Arduino Pin] [  Device Pin  ] [Arduino Pin]
  * 
