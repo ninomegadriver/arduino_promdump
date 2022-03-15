@@ -28,5 +28,5 @@ void config_S123(){
     O=S123_O;
     CE=S123_CE;
     SELECT = S123_SELECT;
-    PROMsize = 32;
+    PROMsize = pow(2,A_pins);
 }

@@ -21,7 +21,7 @@
 
 
 uint8_t STFN_A[]  =     {A0, A1,  A2, A3, A4, 9, 10, 11, 12}; // Address Pins
-uint8_t STFN_O[]  =     {A5, A6, A7,  A8,  4,  5,  6, 7};     // Output Pins
+uint8_t STFN_O[]  =     {A5, A6, A7,  A8,  4, 5,  6,  7};     // Output Pins
 uint8_t STFN_CE[] =     {8};                                  // Chip Select/Enable Pins
 uint8_t STFN_SELECT[] = {0};                                  // Status for enabling the chip
 
@@ -33,5 +33,5 @@ void config_6349(){
     O=STFN_O;
     CE=STFN_CE;
     SELECT = STFN_SELECT;
-    PROMsize = 512;
+    PROMsize = pow(2,A_pins);
 }

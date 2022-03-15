@@ -33,5 +33,5 @@ void config_S141(){
     O=S141_O;
     CE=S141_CE;
     SELECT = S141_SELECT;
-    PROMsize = 512;
+    PROMsize = pow(2,A_pins);
 }

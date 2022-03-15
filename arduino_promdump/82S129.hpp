@@ -29,5 +29,5 @@ void config_S129(){
     O=S129_O;
     CE=S129_CE;
     SELECT = S129_SELECT;
-    PROMsize = 256;
+    PROMsize = pow(2,A_pins);
 }

@@ -31,5 +31,5 @@ void config_MB7123(){
     O=MB7123_O;
     CE=MB7123_CE;
     SELECT = MB7123_SELECT;
-    PROMsize = 512;
+    PROMsize = pow(2,A_pins);
 }
