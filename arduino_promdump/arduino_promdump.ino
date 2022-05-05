@@ -34,6 +34,7 @@ uint8_t  CE_pins=0;         // Number of CE pins
 uint32_t PROMsize = 0;      // Prom size
 uint8_t  Vcc = 0;           // Vcc pin
 uint8_t  GND = 0;           // GND pin
+uint8_t  bitOrder = 0;      // Bit order: LSB=>0, MSB=>1
 
 // To ease bitwise operations
 uint16_t bits[] = {
@@ -104,13 +105,21 @@ uint8_t getByte(bool fuse = false){
   ENABLE(true); // Enable CHIP for reading
   for(int i=0; i<O_pins;i++){
     status = digitalRead(O[i]);
-    result |= status << i;
+    if(bitOrder == 0) result |= status << i;
+    else result |= status >> i;
     fuses.concat(status);  // Save each output state
     fuses.concat(":");
   }
   ENABLE(false); // Disable it for next read
   fuses.remove(fuses.length()-1,1);
-  if(fuse == true) Serial.print(fuses); // Print each Ouput status
+  if(fuse == true){
+    if(bitOrder == 1) {
+      String tmp;
+      for(int i=fuses.length()-1;i>=0;i--) tmp.concat(fuses.charAt(i));
+      fuses = tmp;
+    }
+    Serial.print(fuses); // Print each Ouput status
+  }
   return result;
 }
 
@@ -195,6 +204,8 @@ void MainMenu()
   Serial.println("text   => Dump in readable text format");
   Serial.println("fuse   => Fuse/bits like text readable dump");
   Serial.println("bin    => Dump in raw binary format (for client applications)");
+  Serial.println("lsb    => Set bit order to LSB (default)");
+  Serial.println("msb    => Set bit order to MSB");
   Serial.println("");
   Serial.println("Available devices:");
   Serial.println("");
@@ -208,6 +219,18 @@ void MainMenu()
   input.trim();                                    // Then parse it
   String cmd = getValue(input, ' ', 0);
   String device_string = getValue(input, ' ', 1);
+
+  if(cmd.equals("lsb")){
+    bitOrder = 0;
+    Serial.println("Bit order set to LSB.");
+    betterSafeThanSorry();
+    return;
+  }else if(cmd.equals("msb")){
+    bitOrder = 1;
+    Serial.println("Bit order set to MSB.");
+    betterSafeThanSorry();
+    return;
+  }
 
   if(config_device(device_string) == false){       // Check and configure the selected device
     Serial.println("Invalid device");

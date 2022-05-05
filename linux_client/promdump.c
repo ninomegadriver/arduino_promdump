@@ -108,14 +108,23 @@ void serial_connect(){
   if(l<0) {trigger_error("[4]:"); return;}
 }
 
+void sync(){
+  char c[1];
+  c[0] = 0x01;
+  while(c[0] != 0x00){ // Read Welcome message, until sync char = 0x00
+    read(serial_connected, &c, 1);
+    printf("%c", c[0]);
+  }
+}
+
 // Show usage information then quit
 void usage(char *fname){
   printf("PROMdump v1.0 - nino@nino.com.br\n");
   printf("For combined use with arduino_promdump.ino\n\n");
-  printf("Usage:\n%s -p [prom] -f [file to save dump to] -t [dump type: bin|fuse]\n\n", fname);
+  printf("Usage:\n%s (-b [lsb|msb]) -p [prom] -f [file to save dump to] -t [dump type: bin|fuse]\n\n", fname);
   printf("Ex:\n");
   printf("%s -p 82s129 -f mydump.bin -t bin\n", fname);
-  printf("%s -p 82s141 -f mydump.txt -t fuse\n\n", fname);
+  printf("%s -b msb -p 82s141 -f mydump.txt -t fuse\n\n", fname);
   printf("Supported PROMs:\n");
   printf("82s123, 82s129, 82s141, 6348, 6349, mb7054, mb7123\n\n");
   exit(0);
@@ -131,7 +140,9 @@ int main(int argc, char **argv) {
     char prom[20];
     int promsize=0;
     uint32_t crc = 0;
+    char bitOrder[4];
     sprintf(dumpfile, "%c", 0x00);
+    sprintf(bitOrder, "%c", 0x00);
 
     if (argc==1) {
         usage(argv[0]);
@@ -141,6 +152,7 @@ int main(int argc, char **argv) {
     int option_index = 0, opt;
     static struct option loptions[] = {
         {"help",       no_argument,        0, 'h'},
+        {"order",   optional_argument,  0, 'b'},
         {"prom",       required_argument,  0, 'p'},
         {"file",       required_argument,  0, 'f'},
         {"type",       required_argument,  0, 't'},
@@ -149,9 +161,12 @@ int main(int argc, char **argv) {
 
 
     while(1) {
-        opt = getopt_long (argc, argv, "hp:f:t:", loptions, &option_index);
+        opt = getopt_long (argc, argv, "hb:p:f:t:", loptions, &option_index);
         if (opt==-1) break;
         switch (opt) {
+          case 'b':
+              strcpy(bitOrder, optarg);
+              break;
       	  case 'h':
       	      usage(argv[0]);
       	      break;
@@ -183,11 +198,18 @@ int main(int argc, char **argv) {
       	      sleep(2); // Allow some time to connect
               fileptr = fopen(dumpfile, "w");
               if(!fileptr) trigger_error("7: ");
-              c[0] = 0x01;
-              while(c[0] != 0x00){ // Read Welcome message, until sync char = 0x00
-                r = read(serial_connected, &c, 1);
-                printf("%c", c[0]);
+              sync();
+
+              if(strstr(bitOrder, "msb")){
+                char bcmd[10];
+                sprintf(bcmd, "msb\n");
+                r = write(serial_connected, &bcmd, 10);
+                sleep(2);
+                sync();
+              }else if(strstr(bitOrder, "lsb")){
+                // Default
               }
+
               int address = 0;
               col   = 0;
               crc = 0;
