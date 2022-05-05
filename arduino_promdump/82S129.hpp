@@ -5,14 +5,14 @@
  * 
  * [Arduino Pin] [  Device Pin  ] [Arduino Pin]* 
  * 
- *        A0  <==[A6         VCC]==> Vcc
+ *        A0  <==[A6         VCC]==> +5v
  *        A1  <==[A5    8     A7]==> 12
  *        A2  <==[A4    2   ~CE2]==> 11
  *        A3  <==[A3    S   ~CE1]==> 10
  *        A4  <==[A0    1     O1]==> 9
  *        A5  <==[A1    2     O2]==> 8
  *        A6  <==[A2    9     O3]==> 7
- *        Vcc <==[GND         O4]==> 6
+ *        GND <==[GND         O4]==> 6
  */
 
 
@@ -30,4 +30,6 @@ void config_S129(){
     CE=S129_CE;
     SELECT = S129_SELECT;
     PROMsize = pow(2,A_pins);
+    Vcc = 13;
+    GND = A7;
 }

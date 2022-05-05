@@ -5,7 +5,7 @@
  * 
  * [Arduino Pin] [  Device Pin  ] [Arduino Pin]
  * 
- *        A0  <==[A7         VCC]==> Vcc
+ *        A0  <==[A7         VCC]==> +5v
  *        A1  <==[A6          A8]==> 12
  *        A2  <==[A5    8     NC]==> 11
  *        A3  <==[A4    2   ~CE1]==> 10
@@ -34,4 +34,6 @@ void config_S141(){
     CE=S141_CE;
     SELECT = S141_SELECT;
     PROMsize = pow(2,A_pins);
+    Vcc = 13;
+    GND = A11;
 }

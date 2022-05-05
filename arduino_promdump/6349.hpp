@@ -6,7 +6,7 @@
  * 
  * [Arduino Pin] [  Device Pin  ] [Arduino Pin]
  * 
- *        A0  <==[A0         VCC]==> Vcc
+ *        A0  <==[A0         VCC]==> +5v
  *        A1  <==[A1          A8]==> 12
  *        A2  <==[A2    8     A7]==> 11
  *        A3  <==[A3    2     A6]==> 10
@@ -34,4 +34,6 @@ void config_6349(){
     CE=STFN_CE;
     SELECT = STFN_SELECT;
     PROMsize = pow(2,A_pins);
+    Vcc = 13;
+    GND = A9;
 }

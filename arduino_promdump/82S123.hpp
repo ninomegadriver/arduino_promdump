@@ -5,7 +5,7 @@
  * 
  * [Arduino Pin] [  Device Pin  ] [Arduino Pin]
  * 
- *        A0  <==[O1         VCC]==> Vcc
+ *        A0  <==[O1         VCC]==> +5v
  *        A1  <==[O2     8   ~CE]==> 12
  *        A2  <==[O3     2    A4]==> 11
  *        A3  <==[O4     S    A3]==> 10
@@ -29,4 +29,6 @@ void config_S123(){
     CE=S123_CE;
     SELECT = S123_SELECT;
     PROMsize = pow(2,A_pins);
+    Vcc = 13;
+    GND = A7;
 }

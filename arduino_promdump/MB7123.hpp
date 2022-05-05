@@ -5,7 +5,7 @@
  * 
  * [Arduino Pin] [  Device Pin  ] [Arduino Pin]
  * 
- *        A0  <==[A0         VCC]==> Vcc
+ *        A0  <==[A0         VCC]==> +5v
  *        A1  <==[A1          A8]==> 12
  *        A2  <==[A2    8     A7]==> 11
  *        A3  <==[A3    2     A6]==> 10
@@ -32,4 +32,6 @@ void config_MB7123(){
     CE=MB7123_CE;
     SELECT = MB7123_SELECT;
     PROMsize = pow(2,A_pins);
+    Vcc = 13;
+    GND = A9;
 }

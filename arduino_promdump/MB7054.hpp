@@ -5,7 +5,7 @@
  * 
  * [Arduino Pin] [  Device Pin  ] [Arduino Pin]
  * 
- *        A0  <==[A6         VCC]==> Vcc
+ *        A0  <==[A6         VCC]==> +5v
  *        A1  <==[A5    M     A7]==> 12
  *        A2  <==[A4    B     A8]==> 11
  *        A3  <==[A3    7     A9]==> 10
@@ -31,4 +31,6 @@ void config_MB7054(){
     CE=MB7054_CE;
     SELECT = MB7054_SELECT;
     PROMsize = pow(2,A_pins);
+    Vcc = 13;
+    GND = A8;
 }

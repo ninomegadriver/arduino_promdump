@@ -4,26 +4,22 @@
  *  
  *  GPL v3.0
  *  
- *  Origianlly developed for the Mega 2560, but it may be also
- *  compatible with UNO, if your device has a compatible pin
- *  quantity.
+ *  Origianlly developed for the Mega 2560, but it may be also be
+ *  compatible with UNO, if your device has a compatible numbers 
+ *  of pins.
  *  
  *  Pin and configurations for each supported device in
- *  it's own included file
+ *  it's own included file.
  *  
- *  IMPORTANT:
+ *  For ease of use, I've provided gerbers for a Zif 48
+ *  Arduino Mega shield pcb and also a linux client to 
+ *  save binary dumped data at:
+ *  https://github.com/ninomegadriver/arduino_promdump
  *  
- *  DONT'T EXCEED the 40ma current draw limit of the Arduino.
- *  Check the datasheet of your device first.
- *  
- *  Due to Arduino's "lack" of speed, reads will occur in >250ns, so the
- *  operation should not drain much current on most devices.
- *  
- *  But you've been warned.
  *  
  */
 
-// Include the CRC library by Christopher Baker
+// Include for the CRC library by Christopher Baker
 #include "CRC32.h"
 
 
@@ -36,6 +32,8 @@ uint8_t  O_pins=0;          // Number of Output pins
 uint8_t  A_pins=0;          // Number of Address pins
 uint8_t  CE_pins=0;         // Number of CE pins
 uint32_t PROMsize = 0;      // Prom size
+uint8_t  Vcc = 0;           // Vcc pin
+uint8_t  GND = 0;           // GND pin
 
 // To ease bitwise operations
 uint16_t bits[] = {
@@ -73,8 +71,13 @@ void basicSetup(){
     digitalWrite(A[i],LOW);
   }
   for(int i=0;i<O_pins;i++)  pinMode(O[i] , INPUT);
+}
 
-  
+// Set all pins to input to avoid damaging the proms
+// after a chip swap
+void betterSafeThanSorry(){
+  for(int i=2;i<NUM_DIGITAL_PINS;i++)                 pinMode(i, INPUT); // All digital Pins, except TX and RX
+  for(int i=NUM_DIGITAL_PINS;i<NUM_ANALOG_INPUTS;i++) pinMode(i, INPUT); // All analog pins
 }
 
 // Enables or disables the CHIP
@@ -208,6 +211,7 @@ void MainMenu()
 
   if(config_device(device_string) == false){       // Check and configure the selected device
     Serial.println("Invalid device");
+    betterSafeThanSorry();
     return;
   }
 
@@ -265,6 +269,8 @@ void MainMenu()
       Serial.write(received_byte);
     }
   }
+  
+  betterSafeThanSorry();
     
 }
 
